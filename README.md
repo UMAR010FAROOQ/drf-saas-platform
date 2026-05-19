@@ -1,143 +1,122 @@
-````md
 # DRF SaaS Platform 🚀
 
-A production-grade multi-tenant SaaS backend built with Django REST Framework.
-
-This project demonstrates backend systems engineering concepts including:
-
-- JWT + API Key authentication
-- Organization-based multi-tenancy
-- Subscription & billing lifecycle
-- Usage tracking & rate limiting
-- Feature-based access control
-- Redis caching
-- Celery background processing
-- Celery Beat scheduled tasks
-- Dockerized infrastructure
-- Audit logging & observability
-- Service-layer architecture
-- Automated testing with Pytest
+> A production-grade multi-tenant SaaS backend built with **Django REST Framework** — designed for scalability, security, and real-world deployment.
 
 ---
 
-# 🧠 Architecture Overview
+## 🧠 Architecture Overview
 
-```text
+```
 Client
    ↓
-Authentication Layer
+Authentication Layer  (JWT / API Key)
    ↓
-Permission Layer
+Permission Layer      (Organization-scoped RBAC)
    ↓
-Service Layer
+Service Layer         (Business logic isolation)
    ↓
 PostgreSQL Database
    ↓
 Redis Cache / Queue
    ↓
 Celery Workers & Celery Beat
-````
-
----
-
-# ⚙️ Tech Stack
-
-| Category          | Technology                      |
-| ----------------- | ------------------------------- |
-| Backend           | Django, Django REST Framework   |
-| Database          | PostgreSQL                      |
-| Cache / Queue     | Redis                           |
-| Async Tasks       | Celery, Celery Beat             |
-| Containerization  | Docker, Docker Compose          |
-| Testing           | Pytest, Pytest-Cov, Factory Boy |
-| API Documentation | drf-spectacular                 |
-| Authentication    | JWT, API Keys                   |
-
----
-
-# 🔐 Core Features
-
-## Authentication
-
-* JWT Authentication
-* API Key Authentication
-* Secure key hashing
-* API key expiration support
-
-## Multi-Tenancy
-
-* Organization-based architecture
-* Tenant isolation
-* Membership roles (admin/member)
-
-## SaaS Infrastructure
-
-* Subscription plans
-* Billing simulation engine
-* Feature gating
-* Usage metering
-* Request limits
-
-## Async & Infrastructure
-
-* Redis caching
-* Celery workers
-* Celery Beat scheduler
-* Dockerized deployment
-
-## Observability
-
-* Structured logging
-* Audit logs
-* Activity tracking
-
----
-
-# 📂 Project Structure
-
-```text
-apps/
-├── accounts/
-├── api_keys/
-├── audit/
-├── billing/
-├── organizations/
-├── subscriptions/
-└── usage/
-
-config/
-├── settings/
-├── celery.py
-├── urls.py
-└── utils/
-
-tests/
-
-Dockerfile
-docker-compose.yml
-requirements.txt
-manage.py
-pytest.ini
 ```
 
 ---
 
-# 🚀 Local Development Setup
+## ⚙️ Tech Stack
 
-## 1. Clone Repository
+| Category           | Technology                        |
+|--------------------|-----------------------------------|
+| Backend            | Django, Django REST Framework     |
+| Database           | PostgreSQL                        |
+| Cache / Queue      | Redis                             |
+| Async Tasks        | Celery, Celery Beat               |
+| Containerization   | Docker, Docker Compose            |
+| Testing            | Pytest, Pytest-Cov, Factory Boy   |
+| API Documentation  | drf-spectacular (Swagger UI)      |
+| Authentication     | JWT, API Keys                     |
+
+---
+
+## 🔐 Core Features
+
+### Authentication
+- JWT Authentication
+- API Key Authentication with secure hashing
+- API key expiration support
+
+### Multi-Tenancy
+- Organization-based tenant isolation
+- Membership roles: `admin` / `member`
+
+### SaaS Infrastructure
+- Subscription plans & billing simulation engine
+- Feature gating & flag system
+- Usage metering & request rate limiting
+
+### Async & Infrastructure
+- Redis caching layer
+- Celery workers for background jobs
+- Celery Beat for scheduled tasks
+- Dockerized full-stack deployment
+
+### Observability
+- Structured logging
+- Audit log trail
+- Activity tracking per organization
+
+---
+
+## 📂 Project Structure
+
+```
+drf-saas-platform/
+│
+├── apps/
+│   ├── accounts/
+│   ├── api_keys/
+│   ├── audit/
+│   ├── billing/
+│   ├── organizations/
+│   ├── subscriptions/
+│   └── usage/
+│
+├── config/
+│   ├── settings/
+│   ├── celery.py
+│   ├── urls.py
+│   └── utils/
+│
+├── tests/
+│
+├── Dockerfile
+├── docker-compose.yml
+├── requirements.txt
+├── manage.py
+└── pytest.ini
+```
+
+---
+
+## 🚀 Local Development Setup
+
+### 1. Clone the Repository
 
 ```bash
 git clone <repository-url>
 cd drf-saas-platform
 ```
 
----
+### 2. Create Environment File
 
-## 2. Create Environment File
+Copy the example file and configure your environment:
 
-Create `.env` using `.env.example`.
+```bash
+cp .env.example .env
+```
 
-Example:
+`.env` example:
 
 ```env
 SECRET_KEY=your-secret-key
@@ -152,25 +131,19 @@ DB_PORT=5432
 REDIS_URL=redis://redis:6379/0
 ```
 
----
-
-## 3. Start Docker Services
+### 3. Start Docker Services
 
 ```bash
 docker compose up --build
 ```
 
----
-
-## 4. Run Migrations
+### 4. Run Migrations
 
 ```bash
 docker compose exec web python manage.py migrate
 ```
 
----
-
-## 5. Create Superuser
+### 5. Create Superuser
 
 ```bash
 docker compose exec web python manage.py createsuperuser
@@ -178,25 +151,25 @@ docker compose exec web python manage.py createsuperuser
 
 ---
 
-# 📡 API Documentation
+## 📡 API Documentation
 
-Swagger UI:
+Interactive Swagger UI available at:
 
-```text
+```
 http://localhost:8000/api/docs/
 ```
 
 ---
 
-# 🧪 Testing
+## 🧪 Testing
 
-Run tests:
+Run the full test suite:
 
 ```bash
 pytest
 ```
 
-Run coverage:
+Run with coverage report:
 
 ```bash
 pytest --cov=apps
@@ -204,23 +177,23 @@ pytest --cov=apps
 
 ---
 
-# 🐳 Docker Services
+## 🐳 Docker Services
 
-This project includes:
+| Service        | Description              |
+|----------------|--------------------------|
+| `web`          | Django application       |
+| `db`           | PostgreSQL database      |
+| `redis`        | Redis cache & queue      |
+| `worker`       | Celery worker            |
+| `beat`         | Celery Beat scheduler    |
 
-* Django Application
-* PostgreSQL
-* Redis
-* Celery Worker
-* Celery Beat
-
-Run full stack:
+Start all services:
 
 ```bash
 docker compose up
 ```
 
-Stop services:
+Stop all services:
 
 ```bash
 docker compose down
@@ -228,46 +201,42 @@ docker compose down
 
 ---
 
-# ⚡ SaaS Concepts Implemented
+## ⚡ SaaS Concepts Implemented
 
-* Multi-tenant architecture
-* API key authentication system
-* Subscription lifecycle management
-* Feature flag system
-* Usage tracking & metering
-* Organization-based permissions
-* Async background processing
-* Scheduled task processing
-* Audit logging system
-* Structured observability
-
----
-
-# 🔒 Security Features
-
-* Hashed API keys
-* Environment-based configuration
-* Organization-level access control
-* JWT authentication
-* Request throttling
-* Audit trail system
+- Multi-tenant architecture with tenant isolation
+- API key authentication system with hashing
+- Subscription lifecycle management
+- Feature flag / feature gate system
+- Usage tracking & metering per tenant
+- Organization-based permission model
+- Async background task processing
+- Scheduled task automation
+- Audit logging system
+- Structured observability
 
 ---
 
-# 👨‍💻 Author
+## 🔒 Security Features
 
-## Umar Farooq
+- Hashed API keys (never stored in plaintext)
+- Environment-based secrets management
+- Organization-level access control
+- JWT-based stateless authentication
+- Request throttling per tenant
+- Full audit trail system
 
-Backend Developer — Django / DRF
+---
+
+## 👨‍💻 Author
+
+**Umar Farooq** — Backend Developer (Django / DRF)
 
 Focused on:
-
-* SaaS backend systems
-* API architecture
-* Distributed backend infrastructure
-* Scalable Django applications
+- SaaS backend systems
+- API architecture & design
+- Distributed backend infrastructure
+- Scalable Django applications
 
 ---
 
-```
-```
+> ⭐ If you find this project useful, consider giving it a star!

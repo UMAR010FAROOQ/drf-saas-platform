@@ -1,0 +1,67 @@
+
+services:
+
+  web:
+    build: .
+
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
+
+    volumes:
+      - .:/app
+
+    ports:
+      - "8000:8000"
+
+    env_file:
+      - .env.docker
+
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:16
+
+    environment:
+      POSTGRES_DB: saas_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: umar1234
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+  redis:
+    image: redis:7
+
+  celery:
+    build: .
+
+    command: celery -A config worker -l info
+
+    volumes:
+      - .:/app
+
+    env_file:
+      - .env.docker
+
+    depends_on:
+      - redis
+      - db
+
+  celery-beat:
+    build: .
+
+    command: celery -A config beat -l info
+
+    volumes:
+      - .:/app
+
+    env_file:
+      - .env.docker
+
+    depends_on:
+      - redis
+      - db
+
+volumes:
+  postgres_data:

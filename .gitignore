@@ -1,0 +1,29 @@
+# Virtual Environment
+venv/
+
+# Python
+__pycache__/
+*.pyc
+
+# Environment Variables
+.env
+
+# Coverage / Testing
+.coverage
+coverage/
+.pytest_cache/
+
+# Logs
+logs/
+
+# Celery
+celerybeat-schedule
+celerybeat-schedule.bak
+celerybeat-schedule.dat
+
+# SQLite
+db.sqlite3
+
+# OS Files
+.DS_Store
+Thumbs.db

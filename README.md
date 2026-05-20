@@ -233,7 +233,7 @@ docker compose down
 
 ## Swagger API Documentation
 
-![Swagger Docs](screenshots/swagger-docs.png)
+![Swagger Docs](screenshots/swagger-docs.pdf)
 
 ---
 

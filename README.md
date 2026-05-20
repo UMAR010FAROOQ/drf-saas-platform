@@ -227,38 +227,41 @@ docker compose down
 
 ---
 
-# System Architecture
-```mermaid
-flowchart TD
+---
 
-Client[Client / Postman / Frontend]
+# 📸 Project Screenshots
 
-Client --> Gateway[API Gateway / DRF Router]
+## Swagger API Documentation
 
-Gateway --> AuthLayer[JWT / API Key Authentication]
+![Swagger Docs](screenshots/swagger-docs.png)
 
-AuthLayer --> OrgContext[Organization Context Resolver]
+---
 
-OrgContext --> Permission[Role + Feature Permission Layer]
+## JWT Authentication
 
-Permission --> RateLimit[Rate Limiting Layer]
+![JWT Login](screenshots/jwt-login.png)
 
-RateLimit --> Service[Service Layer]
+---
 
-Service --> DB[(PostgreSQL Database)]
+## API Key Authentication
 
-Service --> Cache[(Redis Cache Layer)]
+![API Key Auth](screenshots/api-key-auth.png)
 
-Service --> Celery[Celery Async Workers]
+---
 
-Celery --> Beat[Celery Beat Scheduler]
+## Docker Infrastructure
 
-Service --> Usage[Usage Tracking System]
+![Docker Containers](screenshots/docker-containers.png)
 
-Service --> Audit[Audit Logging System]
+---
 
-Service --> Observability[Logs / Monitoring Layer]
-...diagram...
+
+## Test Coverage
+
+![Test Coverage](screenshots/test-coverage.png)
+
+---
+
 
 
 

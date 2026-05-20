@@ -1,9 +1,9 @@
+![Django CI](https://github.com/UMAR010FAROOQ/drf-saas-platform/actions/workflows/ci.yml/badge.svg)
+---
+
 # Multi-Tenant SaaS API (DRF + Celery + Redis + API Keys) 🚀
 
 > A production-grade multi-tenant SaaS backend built with **Django REST Framework** — designed for scalability, security, and real-world deployment.
-
----
-![Django CI](https://github.com/UMAR010FAROOQ/drf-saas-platform/actions/workflows/ci.yml/badge.svg)
 
 ---
 

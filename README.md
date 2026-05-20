@@ -1,4 +1,4 @@
-# DRF SaaS Platform 🚀
+# Multi-Tenant SaaS API (DRF + Celery + Redis + API Keys) 🚀
 
 > A production-grade multi-tenant SaaS backend built with **Django REST Framework** — designed for scalability, security, and real-world deployment.
 
@@ -226,6 +226,41 @@ docker compose down
 - Full audit trail system
 
 ---
+
+# System Architecture
+```mermaid
+flowchart TD
+
+Client[Client / Postman / Frontend]
+
+Client --> Gateway[API Gateway / DRF Router]
+
+Gateway --> AuthLayer[JWT / API Key Authentication]
+
+AuthLayer --> OrgContext[Organization Context Resolver]
+
+OrgContext --> Permission[Role + Feature Permission Layer]
+
+Permission --> RateLimit[Rate Limiting Layer]
+
+RateLimit --> Service[Service Layer]
+
+Service --> DB[(PostgreSQL Database)]
+
+Service --> Cache[(Redis Cache Layer)]
+
+Service --> Celery[Celery Async Workers]
+
+Celery --> Beat[Celery Beat Scheduler]
+
+Service --> Usage[Usage Tracking System]
+
+Service --> Audit[Audit Logging System]
+
+Service --> Observability[Logs / Monitoring Layer]
+...diagram...
+
+
 
 ## 👨‍💻 Author
 
